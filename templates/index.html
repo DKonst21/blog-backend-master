@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="{% static 'C:/Python_projects/blog-backend-master/static/styles.min.css' %}">
   </head>
   <body>
+      <!--================ Blog slider start =================-->
+    <section>
+      <div class="container">
+        <div class="d-flex">
+
+          {% for post in most_popular_posts %}
+
+            <div class="flex-fill" style="margin-right: 30px;">
+              <div class="card blog__slide text-center">
+                <div class="blog__slide__img">
+                    <img class="img-fluid" src="{{ post.image_url }}" alt="Blog_image">
+                </div>
+                <div class="blog__slide__content">
+                  <h3><a href="post/{{ post.slug }}">{{ post.title }}</a></h3>
+                  <p>{{ post.published_at }}</p>
+                </div>
+              </div>
+            </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    <!--================ Blog slider end =================-->
+
     <!--================Header Menu Area =================-->
     <header class="header_area">
       <div class="main_menu">
