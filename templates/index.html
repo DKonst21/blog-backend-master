@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'C:/Python_projects/blog-backend-master/static/styles.min.css' %}">
   </head>
   <body>
-      <!--================ Blog slider start =================-->
+    <!--================ Blog slider start =================-->
     <section>
       <div class="container">
         <div class="d-flex">
@@ -21,7 +21,13 @@
             <div class="flex-fill" style="margin-right: 30px;">
               <div class="card blog__slide text-center">
                 <div class="blog__slide__img">
+
+                  {% if post.image_url %}
                     <img class="img-fluid" src="{{ post.image_url }}" alt="Blog_image">
+                  {% else %}
+                    <img class="img-fluid" src="{% static 'img/banner/blog.png' %}" alt="Blog_image">
+                  {% endif %}
+
                 </div>
                 <div class="blog__slide__content">
                   <h3><a href="post/{{ post.slug }}">{{ post.title }}</a></h3>
@@ -36,6 +42,66 @@
       </div>
     </section>
     <!--================ Blog slider end =================-->
+
+    <!--================ Start Blog Post Area =================-->
+    <section class="blog-post-area section-margin mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+
+            {% for fresh in fresh_posts %}
+              <div class="single-recent-blog-post">
+                <div class="thumb">
+
+                  {% if fresh.image_url %}
+                    <img class="img-fluid" src="{{ fresh.image_url }}" alt="fresh_post_image">
+                  {% else %}
+                    <img class="img-fluid" src="{% static 'img/banner/blog.png' %}" alt="fresh_post_image">
+                  {% endif %}
+
+                  <ul class="thumb-info">
+                    <li><a href="#"><i class="ti-user"></i>{{ fresh.author }}</a></li>
+                    <li><a href="#"><i class="ti-notepad"></i>{{ fresh.published_at }}</a></li>
+                    <li><a href="#"><i class="ti-themify-favicon"></i>{{ fresh.comments_amount }} Comments</a></li>
+                  </ul>
+                </div>
+                <div class="details mt-20">
+                  <h3>{{ fresh.title }}</h3>
+                  <p>{{ fresh.text|truncatechars:200 }}</p>
+                  <a class="button" href="post/{{ fresh.slug }}">Read More <i class="ti-arrow-right"></i></a>
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="row">
+              <div class="col-lg-12">
+                <nav class="blog-pagination justify-content-center d-flex">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a href="#" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">
+                          <i class="ti-angle-left"></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item">
+                      <a href="#" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">
+                          <i class="ti-angle-right"></i>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================ End Blog Post Area =================-->
 
     <!--================Header Menu Area =================-->
     <header class="header_area">
